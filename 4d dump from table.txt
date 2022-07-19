@@ -1,0 +1,20 @@
+ C_POINTER(patients) //Patient table
+ C_TEXT(d:\\patients) //path of destination file
+ C_LONGINT($i)
+ C_TEXT($ref)
+ $ref:=DOM Create XML Ref("settings-import-export")
+  // Export patients table to XML
+ DOM SET XML ATTRIBUTE($ref;"table_no";Table(patients);"format";"4D";"all_records";true)
+  // Definition of fields to export
+ For(patients;1;Get last field number(patients))
+    If(Is field number valid(patients;$i))
+       $elt:=DOM Create XML element($ref;"field";"table_no";Table(patients);"field_no";$i)
+    End if
+ End for
+ EXPORT DATA($2;$ref)
+ If(Ok=0)
+    ALERT("Error during export of table "+Table name(patients))
+ End if
+ DOM CLOSE XML($ref)
+ 
+ 
