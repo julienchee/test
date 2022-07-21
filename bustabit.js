@@ -1,3 +1,4 @@
+// https://jsfiddle.net/Dexon95/2fmuxLza/show
 // https://www.bustabit.com/play
 // 0000000000000000004d6ec16dafe9d8370958664c1dc422f452892264c59526
 const gameResult = (seed, salt) => {
@@ -80,7 +81,7 @@ for (let i = 2000; i < 3000; i++) {
   pos_x = i;
   pos_revenue = possibility[pos_x] * (pos_x / 100.0) / Math.pow(2, suitable_bits);
 
-  if (( pos_revenue > max_revenue) && (pos_x > max_x)) {
+  if (( pos_revenue >= max_revenue) && (pos_x > max_x)) {
     max_x = pos_x;
     max_revenue = pos_revenue;
   }
