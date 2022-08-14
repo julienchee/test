@@ -115,4 +115,7 @@ console.log('x: ' + max_x + ', revenue: ' + max_revenue);
 // Strategy
 // x bit
 // 1.28 / 0.28 * x bit
-// 4.57143
+// 4.58
+// 20.98
+// 96.09
+// 440.1
