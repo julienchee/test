@@ -111,3 +111,8 @@ console.log('x: ' + max_x + ', revenue: ' + max_revenue);
 // 23: {x: 84.48, revenue: 0.99}
 // 24: {x: 92.16, revenue: 0.99}
 // 25: {x: 983.04, revenue: 0.99}
+
+// Strategy
+// x bit
+// 1.28 / 0.28 * x bit
+// 4.57143
