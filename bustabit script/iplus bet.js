@@ -23,6 +23,8 @@ function onGameStarted() {
   makeBet();
 }
 
+const initialBetAmount = config.wager.value;
+
 function onGameEnded() {
   var lastGame = engine.history.first();
 
@@ -36,7 +38,7 @@ function onGameEnded() {
       (config.wager.value * lastGame.cashedAt - config.wager.value) / 100;
     log("we won", profit.toFixed(2), "bits");
 
-    config.wager.value = 100;
+    config.wager.value = initialBetAmount;
   } else {
     log("we lost", Math.round(config.wager.value / 100), "bits");
 
