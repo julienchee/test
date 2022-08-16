@@ -63,7 +63,7 @@ for (let pos_x in possibility) {
 console.log(max_x_list);
 console.log('x: ' + max_x + ', revenue: ' + max_revenue);
 
-for (let i = 0; i < 100; i++) {
+for (let i = 0; i < 10; i++) {
   pos_x = i * 100;
   pos_revenue = possibility[pos_x] * (pos_x / 100.0) / Math.pow(2, suitable_bits);
   max_x = pos_x;
@@ -77,11 +77,11 @@ for (let i = 0; i < 100; i++) {
 max_x = 100;
 max_revenue = 0;
 
-for (let i = 2000; i < 3000; i++) {
+for (let i = 200; i > 100; i--) {
   pos_x = i;
   pos_revenue = possibility[pos_x] * (pos_x / 100.0) / Math.pow(2, suitable_bits);
 
-  if (( pos_revenue >= max_revenue) && (pos_x > max_x)) {
+  if (( pos_revenue >= max_revenue)) {
     max_x = pos_x;
     max_revenue = pos_revenue;
   }
@@ -89,6 +89,10 @@ for (let i = 2000; i < 3000; i++) {
 
 console.log('x: ' + max_x + ', revenue: ' + max_revenue);
 
+// 0: {x: 1.01, revenue: 0.9899999457597732}
+// 1: {x: 1.02, revenue: 0.9899999713897705}
+// 2: {x: 1.04, revenue: 0.9899999952316284}
+// 3: {x: 1.16, revenue: 0.9899999952316284}
 // 4: {x: 1.28, revenue: 0.99}
 // 5: {x: 1.32, revenue: 0.99}
 // 6: {x: 1.44, revenue: 0.99}
@@ -116,10 +120,11 @@ console.log('x: ' + max_x + ', revenue: ' + max_revenue);
 // x bit
 // 1.28 / 0.28 * x bit
 // 4.58
-// 5
-// 23
-// 106
-// 486
-// 2226
+// 1 (0.29 / 1.28) ^ 1 = 0.2265625
+// 5 (0.29 / 1.28) ^ 2 = 0.05133056640625
+// 23 (0.29 / 1.28) ^ 3 = 0.01162958145
+// 106 (0.29 / 1.28) ^ 4 = 0.0026348270475864
+// 486 (0.29 / 1.28) ^ 5 = 5.96953003×10−4
+// 2226 1 / (0.29 / 1.28) ^ 6 * 0.28
 // 10196
 // 46698

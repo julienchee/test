@@ -24,6 +24,7 @@ function onGameStarted() {
 }
 
 const initialBetAmount = config.wager.value;
+const payoutX = config.payout.value;
 
 function onGameEnded() {
   var lastGame = engine.history.first();
@@ -42,7 +43,7 @@ function onGameEnded() {
   } else {
     log("we lost", Math.round(config.wager.value / 100), "bits");
 
-    config.wager.value = Math.ceil(config.wager.value * (1.28 / 0.28) / 100) * 100;
+    config.wager.value = Math.ceil(config.wager.value * (payoutX / (payoutX - 1)) / 100) * 100;
   }
 }
 
