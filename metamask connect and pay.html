@@ -1,0 +1,61 @@
+<html>
+  <head>
+    <link rel="shortcut icon" href="https://github.com/favicon.ico" />
+  </head>
+  <button class="enableEthereumButton btn">Enable Ethereum</button>
+  <button class="sendEthButton btn">Send Eth</button>
+</html>
+<script>
+  const setupActions = () => {
+    const ethereumButton = document.querySelector('.enableEthereumButton');
+    const sendEthButton = document.querySelector('.sendEthButton');
+
+    let accounts = [];
+    // https://www.rapidtables.com/convert/number/decimal-to-hex.html
+    let price = "0x16345785D8A0000";
+
+    price = "0x38D7EA4C68000";
+
+    async function getAccount() {
+      accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+    }
+
+    const paymentRequest = () => {
+
+      ethereum
+        .request({
+          method: 'eth_sendTransaction',
+          params: [
+            {
+              from: accounts[0],
+              to: '0x1666ddaB5561f565c9409c0dD846B5a24beC2698',
+              value: price,
+              gas: '0x00DF', // gas limit 223
+              // gas: '0x03E8', // gas limit 1000 0.1
+              gasPrice: '0x09184e72a000', // 10000000000000
+            },
+          ],
+        })
+        .then((txHash) => console.log(txHash))
+        .catch((error) => console.error);
+    };
+
+    //Sending Ethereum to an address
+    sendEthButton.addEventListener('click', () => {
+      getAccount().then(() => {
+        paymentRequest();
+      });
+    });
+
+    ethereumButton.addEventListener('click', () => {
+      getAccount();
+    });
+  }
+
+  if (typeof window.ethereum !== 'undefined') {
+    console.log('MetaMask is installed!');
+    setupActions();
+  } else {
+    console.log('Please Install MetaMask!');
+  }
+</script>
