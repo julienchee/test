@@ -69,6 +69,7 @@ const detectDiscriminating = (opt_doc) => {
 };
 
 console.log(detectDiscriminating(window));
+console.log(detectDiscriminating(document));
 
 const clearDiscriminating = () => {
   foundKeys = detectDiscriminating(window);
@@ -87,3 +88,4 @@ const clearDiscriminating = () => {
 clearDiscriminating();
 console.log('clearDiscriminating');
 console.log(detectDiscriminating(window));
+console.log(detectDiscriminating(document));
