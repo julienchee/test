@@ -4,4 +4,14 @@ Update C:\Users\[username]\.webdrivers\chromedriver.exe
 
 # For Ubuntu OS
 cp  ~/.webdrivers/chromedriver  ~/.webdrivers/chromedriver.origin.bak
-nano ~/.webdrivers/chromedriver
+vim ~/.webdrivers/chromedriver
+
+press /cdc
+press i
+press escape key
+press :wq
+
+> update window
+> var key = 'version';//12345678901234567';
+
+check by selenium detection script.
