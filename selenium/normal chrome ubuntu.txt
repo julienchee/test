@@ -1,0 +1,27 @@
+Google Chrome	104.0.5112.101 (Official Build) (64-bit)
+Revision	0a2e5078088fc9f9a29247aaa40af9e7ada8b79f-refs/branch-heads/5112@{#1477}
+OS	Linux
+JavaScript	V8 10.4.132.22
+User Agent	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+Command Line	/usr/bin/google-chrome-stable --enable-crashpad --enable-features --disable-features --flag-switches-begin --flag-switches-end --desktop-startup-id=xfce4-appfinder/|usr|bin|google-chrome-stable/9711-9-iplus_TIME1604155702
+Executable Path	/opt/google/chrome/google-chrome
+Profile Path	/home/ubuntu/.config/google-chrome/Default
+Active Variations	52d268a5-ca7d8d80
+df319cb2-ca7d8d80
+3e7d7783-ced64eb0
+7e184ca7-33c3eba5
+16b16054-377be55a
+e5726113-ca7d8d80
+59b6f412-377be55a
+60d4b352-377be55a
+bd717e5b-377be55a
+1206dd0e-653f2bb7
+273268f8-7c85fa18
+e9e64bcb-42fad646
+93a56d7-f9a43703
+9d165456-83c7a291
+13e2821-ca7d8d80
+eddd0d82-7723ede9
+53879ff4-22e3066b
+cae31965-e8aed2a5
+826f3281-377be55a

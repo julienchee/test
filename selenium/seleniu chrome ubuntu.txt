@@ -1,0 +1,19 @@
+Google Chrome	104.0.5112.101 (Official Build) (64-bit)
+Revision	0a2e5078088fc9f9a29247aaa40af9e7ada8b79f-refs/branch-heads/5112@{#1477}
+OS	Linux
+JavaScript	V8 10.4.132.22
+User Agent	Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.0.0 Safari/537.36
+Command Line	/usr/bin/google-chrome --allow-pre-commit-input --disable-background-networking --disable-client-side-phishing-detection --disable-default-apps --disable-hang-monitor --disable-popup-blocking --disable-prompt-on-repost --disable-sync --enable-blink-features=ShadowDOMV0 --enable-logging --log-level=0 --no-first-run --no-service-autorun --password-store=basic --profile-directory=Profile 1 --remote-debugging-port=0 --start-maximized --test-type=webdriver --use-mock-keychain --user-data-dir=/home/ubuntu/.config/google-chrome --enable-crashpad --enable-features --disable-features --flag-switches-begin --flag-switches-end
+Executable Path	/opt/google/chrome/google-chrome
+Profile Path	/home/ubuntu/.config/google-chrome/Profile 1
+Active Variations	52d268a5-ca7d8d80
+df319cb2-ca7d8d80
+19d59c16-377be55a
+3e7d7783-ced64eb0
+7e184ca7-33c3eba5
+5c3755-377be55a
+16b16054-377be55a
+7f244f68-ca7d8d80
+b256ac23-ca7d8d80
+e5726113-ca7d8d80
+59b6f412-377be55a

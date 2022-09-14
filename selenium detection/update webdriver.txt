@@ -4,9 +4,11 @@ Update C:\Users\[username]\.webdrivers\chromedriver.exe
 
 # For Ubuntu OS
 cp  ~/.webdrivers/chromedriver  ~/.webdrivers/chromedriver.origin.bak
+
+ls ~/.webdrivers/
 vim ~/.webdrivers/chromedriver
 
-press /cdc
+press /cdc_
 press i
 press escape key
 press :wq
@@ -16,5 +18,5 @@ press :wq
 
 check by selenium detection script.
 
-remote-debugging-port
-user-data-directory-1
+//remote-debugging-port
+//user-data-directory-1
