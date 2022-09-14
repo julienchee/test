@@ -70,22 +70,23 @@ const detectDiscriminating = (opt_doc) => {
 
 console.log(detectDiscriminating(window));
 console.log(detectDiscriminating(document));
+console.log(navigator.webdriver);
 
-const clearDiscriminating = () => {
-  foundKeys = detectDiscriminating(window);
+// const clearDiscriminating = () => {
+//   foundKeys = detectDiscriminating(window);
 
-  foundKeys.forEach((value) => {
-    delete window[value];
-  });
+//   foundKeys.forEach((value) => {
+//     delete window[value];
+//   });
 
-  foundKeys = detectDiscriminating(document);
+//   foundKeys = detectDiscriminating(document);
 
-  foundKeys.forEach((value) => {
-    delete document[value];
-  });
-};
+//   foundKeys.forEach((value) => {
+//     delete document[value];
+//   });
+// };
 
-clearDiscriminating();
-console.log('clearDiscriminating');
-console.log(detectDiscriminating(window));
-console.log(detectDiscriminating(document));
+// clearDiscriminating();
+// console.log('clearDiscriminating');
+// console.log(detectDiscriminating(window));
+// console.log(detectDiscriminating(document));

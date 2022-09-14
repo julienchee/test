@@ -15,3 +15,6 @@ press :wq
 > var key = 'version';//12345678901234567';
 
 check by selenium detection script.
+
+remote-debugging-port
+user-data-directory-1
