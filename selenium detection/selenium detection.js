@@ -53,7 +53,7 @@ runBotDetection = function () {
   return false;
 };
 
-runBotDetection();
+console.log(runBotDetection());
 
 const detectDiscriminating = (opt_doc) => {
   keyword = 'cdc_';
