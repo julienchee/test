@@ -1,0 +1,273 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <title>Ethercrash - Game Verification Script</title>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="googlebot" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.js"
+
+  ></script>
+    <link rel="stylesheet" type="text/css" href="/css/normalize.css">
+
+    <link rel="stylesheet" type="text/css" href="/css/result-light.css">
+
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+      <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+
+  <style id="compiled-css" type="text/css">
+      table {
+  table-layout: fixed;
+}
+
+table thead tr th:first-child {
+  width: 80%;
+}
+
+table tbody tr td {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.blue {
+  background-color: greenyellow !important;
+}
+.is-first {
+  background-color: rgba(195, 111, 24, 0.2);
+}
+
+.is-over-median {
+  color: #44B39D;
+}
+
+.is-at-median {
+  color: #3B3C3D;
+}
+
+.is-under-median {
+  color: #BF4A67;
+}
+
+</style>
+
+</head>
+<body>
+  <section class="section">
+    <div class="container">
+      <h1 class="title">Ethercrash - Game Verification Script</h1>
+    </div>
+    <hr>
+    <div class="container">
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="text" id="game_hash_input" placeholder="Game's hash (SHA256)">
+          <span class="icon is-small is-left">
+            <i class="fa fa-key"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="number" id="game_amount_input" min="1" max="100000" step="1" placeholder="Amount of games" value="10">
+          <span class="icon is-small is-left">
+            <i class="fa fa-hashtag"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="number" id="game_amount_limit_input" min="1" max="100000" placeholder="Limit Amount" value="1.25">
+          <span class="icon is-small is-left">
+            <i class="fa fa-hashtag"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="number" id="game_seq_min_count" min="1" max="100000" placeholder="Seq Min Count" value="1">
+          <span class="icon is-small is-left">
+            <i class="fa fa-hashtag"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field">
+        <p class="control has-icons-left">
+          <input class="input" type="number" id="game_show_result" min="0" max="1" placeholder="Show/Hide Result" value="1">
+          <span class="icon is-small is-left">
+            <i class="fa fa-hashtag"></i>
+          </span>
+        </p>
+      </div>
+      <div class="field is-grouped">
+        <p class="control">
+          <a class="button is-primary" id="game_verify_submit">
+            Verify
+          </a>
+        </p>
+      </div>
+    </div>
+    <hr>
+    <div class="container">
+      <table class="table is-striped is-fullwidth is-hoverable is-narrow">
+        <thead>
+          <tr>
+            <th><b>Game's hash</b></th>
+            <th><b>Bust</b></th>
+          </tr>
+        </thead>
+        <tbody id="game_verify_table"></tbody>
+      </table>
+    </div>
+  </section>
+
+
+<script type="text/javascript">//<![CDATA[
+var isVerifying = false;
+var seq_count = 0;
+var max_seq_count = 0;
+var seq_count_bigger_than_min = 0;
+
+var amount_limit = 0;
+$('#game_verify_submit').on('click', () => {
+  if (isVerifying) return;
+  isVerifying = true;
+  $('#game_hash_input').parent().addClass('is-loading');
+  $('#game_verify_submit').addClass('is-loading');
+  $('#game_hash_input, #game_amount_input, #game_verify_submit').attr('disabled', 'disabled');
+  $('#game_verify_table').html('');
+  //Init
+  seq_count = 0;
+	max_seq_count = 0;
+	seq_count_bigger_than_min = 0;
+	//
+  amount_limit = $('#game_amount_limit_input').val() * 1.0;
+  let seq_min_count = $('#game_seq_min_count').val() * 1;
+  let game_show_result = $('#game_show_result').val() * 1;
+
+  let prevHash = null;
+  for (let i = 0; i < $('#game_amount_input').val(); i++) {
+    let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : $('#game_hash_input').val());
+    let bust = gameResult(hash, '0xd8b8a187d5865a733680b4bf4d612afec9c6829285d77f438cd70695fb946801');
+    let mark = false;
+    if(bust<amount_limit) {
+      seq_count++;
+    } else {
+      max_seq_count = Math.max(max_seq_count, seq_count);
+
+      if (seq_count>=seq_min_count) {
+      	seq_count_bigger_than_min++;
+        mark = true;
+      }
+      seq_count = 0;
+    }
+    if (game_show_result) {
+      setTimeout(function() {
+        addTableRow(hash, bust, i, mark);
+      }, i * 1);
+    }
+
+    prevHash = hash;
+  }
+  max_seq_count = Math.max(max_seq_count, seq_count);
+  // alert("Max Seq Count:"+ max_seq_count+" ;; " + "Seq Count eq/bigger than "+seq_min_count+":"+seq_count_bigger_than_min);
+  if (!game_show_result) {
+    $('#game_hash_input').parent().removeClass('is-loading');
+    $('#game_verify_submit').removeClass('is-loading');
+    $('#game_hash_input, #game_amount_input, #game_verify_submit').removeAttr("disabled");
+    isVerifying = false;
+  }
+});
+
+$('#game_amount_input').on('keyup', () => {
+  if ($('#game_amount_input').val() >= 10000) {
+    if ($('#game_verify_warning').length) return;
+    $('#game_verify_submit').parent().append(
+      $('<span/>').attr({
+        'id': 'game_verify_warning',
+        'class': 'tag is-warning'
+      }).text("Verifying a huge amount of games may consume more ressources from your CPU")
+    );
+  } else {
+    if ($('#game_verify_warning').length) {
+      $('#game_verify_warning').remove();
+    }
+  }
+});
+
+const addTableRow = (hash, bust, index, mark) => {
+  $('<tr/>').attr({
+    'class': index === 0 ? 'is-first' : null
+  }).append(
+    $('<td/>').attr({
+    'class': mark == true ? 'blue' : null
+  }).text(mark == true ? '*'+hash : hash)
+  ).append(
+    $('<td/>').text(bust).attr({
+      'class': bust === amount_limit ? 'is-at-median' : bust > amount_limit ? 'is-over-median' : 'is-under-median'
+    })
+  ).appendToWithIndex($('#game_verify_table'), index);
+
+  if (index >= $('#game_amount_input').val() - 1) {
+    $('#game_hash_input').parent().removeClass('is-loading');
+    $('#game_verify_submit').removeClass('is-loading');
+    $('#game_hash_input, #game_amount_input, #game_verify_submit').removeAttr("disabled");
+    isVerifying = false;
+  }
+};
+
+function divisible(hash, mod) {
+    // So ABCDEFGHIJ should be chunked like  AB CDEF GHIJ
+    var val = 0;
+
+    var o = hash.length % 4;
+    for (var i = o > 0 ? o - 4 : 0; i < hash.length; i += 4) {
+        val = ((val << 16) + parseInt(hash.substring(i, i+4), 16)) % mod;
+    }
+
+    return val === 0;
+}
+
+/**
+  * @desc Calculates the game result from its hash
+  * @param binary seed - Hash of the game. Ex.: Buffer.from(seed)
+  * @param string salt - Client seed; A bitcoin block hash
+  * @return number
+*/
+function hmac(key, v) {
+    var hmacHasher = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, key);
+    return hmacHasher.finalize(v).toString();
+}
+
+function gameResult(serverSeed, salt) {
+    var hash = hmac(serverSeed, salt);
+
+    if (divisible(hash, 101))
+        return 0;
+
+    var h = parseInt(hash.slice(0,52/4),16);
+    var e = Math.pow(2,52);
+
+    return (Math.floor((100 * e - h) / (e - h))/100).toFixed(2);
+};
+
+$.fn.appendToWithIndex = function(to, index) {
+  if (!to instanceof jQuery) {
+    to = $(to);
+  }
+  if (index === 0) {
+    $(this).prependTo(to);
+  } else {
+    $(this).insertAfter(to.children().eq(index - 1));
+  }
+};
+</script>
+</body>
+</html>
