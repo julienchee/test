@@ -1,0 +1,78 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.9-1/crypto-js.min.js"></script>
+  </head>
+  <body>
+    <script>
+    function divisible(hash, mod) {
+        var val = 0;
+
+        var o = hash.length % 4;
+        for (var i = o > 0 ? o - 4 : 0; i < hash.length; i += 4) {
+            val = ((val << 16) + parseInt(hash.substring(i, i+4), 16)) % mod;
+        }
+
+        return val === 0;
+      }
+
+      function hmac(key, v) {
+        var hmacHasher = CryptoJS.algo.HMAC.create(CryptoJS.algo.SHA256, key);
+        return hmacHasher.finalize(v).toString();
+      }
+
+      function gameResult(serverSeed, salt) {
+        var hash = hmac(serverSeed, salt);
+
+        if (divisible(hash, 101))
+            return 0;
+
+        var h = parseInt(hash.slice(0,52/4),16);
+        var e = Math.pow(2,52);
+
+        return Math.floor((100 * e - h) / (e - h));
+      };
+
+      // Calculate possibility
+      const total_rounds = 123456;
+      const max_pos_revenue = 0.99;
+      let possibility = [];
+      let max_x_list = [];
+
+      let prevHash = null;
+
+      for (let i = 0; i < total_rounds; i++) {
+        let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : '1');
+        let bust = gameResult(hash, '0xd8b8a187d5865a733680b4bf4d612afec9c6829285d77f438cd70695fb946801');
+        let result = bust;
+        result = Math.min(5432100, result);
+
+        for (let k = 0; k <= result; k++) {
+          if (possibility[k] == undefined) {
+            possibility[k] = 0;
+          }
+
+          possibility[k]++;
+        }
+      }
+
+      let max_x = 100;
+      let max_revenue = 0;
+
+      for (let pos_x in possibility) {
+        pos_revenue = possibility[pos_x] * (pos_x / 100.0) / total_rounds;
+
+        if (( pos_revenue >= max_revenue) && (pos_x > max_x)) {
+          max_x = pos_x;
+          max_revenue = pos_revenue;
+
+          // if ( pos_revenue > max_pos_revenue - 0.0001) {
+            max_x_list.push({x: pos_x / 100.0, revenue: pos_revenue});
+          // }
+        }
+      }
+
+      console.log(max_x_list);
+      console.log('x: ' + max_x + ', revenue: ' + max_revenue);
+    </script>
+  </body>
+</html>
