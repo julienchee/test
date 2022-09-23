@@ -41,7 +41,7 @@
       let prevHash = null;
 
       for (let i = 0; i < total_rounds; i++) {
-        let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : '1');
+        let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : '2');
         let bust = gameResult(hash, '0xd8b8a187d5865a733680b4bf4d612afec9c6829285d77f438cd70695fb946801');
         let result = bust;
         result = Math.min(5432100, result);
@@ -53,6 +53,8 @@
 
           possibility[k]++;
         }
+
+        prevHash = hash;
       }
 
       let max_x = 100;
