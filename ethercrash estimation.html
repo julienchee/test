@@ -34,6 +34,7 @@
 
       // Calculate possibility
       const total_rounds = 123456;
+      const limited_x = 123400;
       const max_pos_revenue = 0.99;
       let possibility = [];
       let max_x_list = [];
@@ -41,10 +42,10 @@
       let prevHash = null;
 
       for (let i = 0; i < total_rounds; i++) {
-        let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : '2');
+        let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : '85a83cb9e06ccca500ff3c2f794b8c0020cad255916edc5039f88222c92c9f5f');
         let bust = gameResult(hash, '0xd8b8a187d5865a733680b4bf4d612afec9c6829285d77f438cd70695fb946801');
         let result = bust;
-        result = Math.min(5432100, result);
+        result = Math.min(limited_x, result);
 
         for (let k = 0; k <= result; k++) {
           if (possibility[k] == undefined) {
@@ -57,24 +58,28 @@
         prevHash = hash;
       }
 
+      // console.log(possibility);
+
       let max_x = 100;
       let max_revenue = 0;
+      let max_x_count = 0;
 
       for (let pos_x in possibility) {
         pos_revenue = possibility[pos_x] * (pos_x / 100.0) / total_rounds;
 
-        if (( pos_revenue >= max_revenue) && (pos_x > max_x)) {
+        if (( pos_revenue >= max_revenue) && (+pos_x > +max_x)) {
           max_x = pos_x;
           max_revenue = pos_revenue;
+          max_x_count = possibility[pos_x];
 
           // if ( pos_revenue > max_pos_revenue - 0.0001) {
-            max_x_list.push({x: pos_x / 100.0, revenue: pos_revenue});
+            max_x_list.push({x: (pos_x / 100.0).toFixed(2), revenue: pos_revenue, count: possibility[pos_x]});
           // }
         }
       }
 
       console.log(max_x_list);
-      console.log('x: ' + max_x + ', revenue: ' + max_revenue);
+      console.log('x: ' + (max_x / 100.0).toFixed(2) + ', revenue: ' + max_revenue, 'count: ' + max_x_count);
     </script>
   </body>
 </html>

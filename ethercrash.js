@@ -54,7 +54,7 @@ let max_revenue = 0;
 for (let pos_x in possibility) {
   pos_revenue = possibility[pos_x] * (pos_x / 100.0) / Math.pow(2, suitable_bits) * 100.0 / 101.0;
 
-  if (( pos_revenue >= max_revenue) && (pos_x > max_x)) {
+  if (( pos_revenue >= max_revenue) && (+pos_x > +max_x)) {
     max_x = pos_x;
     max_revenue = pos_revenue;
 
@@ -73,5 +73,5 @@ for (let i = 0; i < 100; i++) {
   max_x = pos_x;
   max_revenue = pos_revenue;
 
-  console.log('x: ' + max_x / 100.0 + ', revenue: ' + max_revenue);
+  console.log('x: ' + (max_x / 100.0).toFixed(2) + ', revenue: ' + max_revenue);
 }
