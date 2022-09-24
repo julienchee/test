@@ -42,7 +42,7 @@
       let prevHash = null;
 
       for (let i = 0; i < total_rounds; i++) {
-        let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : '85a83cb9e06ccca500ff3c2f794b8c0020cad255916edc5039f88222c92c9f5f');
+        let hash = String(prevHash ? CryptoJS.SHA256(String(prevHash)) : '4f360df37e69816930437b0e21a15391e2f37c2c204965ba0c7c01202581f063');
         let bust = gameResult(hash, '0xd8b8a187d5865a733680b4bf4d612afec9c6829285d77f438cd70695fb946801');
         let result = bust;
         result = Math.min(limited_x, result);

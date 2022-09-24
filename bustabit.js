@@ -50,7 +50,7 @@ let max_revenue = 0;
 for (let pos_x in possibility) {
   pos_revenue = possibility[pos_x] * (pos_x / 100.0) / Math.pow(2, suitable_bits);
 
-  if (( pos_revenue >= max_revenue) && (pos_x > max_x)) {
+  if (( pos_revenue >= max_revenue) && (+pos_x > +max_x)) {
     max_x = pos_x;
     max_revenue = pos_revenue;
 
