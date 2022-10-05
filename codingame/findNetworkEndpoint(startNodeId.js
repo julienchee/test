@@ -12,7 +12,7 @@ function findNetworkEndpoint(startNodeId, fromIds, toIds) {
     if (indexOfFinalNodeId !== -1) {
       nextNodeId = toIds[indexOfFinalNodeId];
 
-      if (traveledIds.includes(nextNodeId) {
+      if (traveledIds.includes(nextNodeId)) {
         break;
       }
 
