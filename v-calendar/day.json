@@ -1,0 +1,72 @@
+{
+    "day": {
+        "id": "2022-10-04",
+        "label": "4",
+        "ariaLabel": "Tuesday, October 4, 2022",
+        "day": 4,
+        "dayFromEnd": 28,
+        "weekday": 3,
+        "weekdayPosition": 3,
+        "weekdayPositionFromEnd": 4,
+        "weekdayOrdinal": 1,
+        "weekdayOrdinalFromEnd": 4,
+        "week": 2,
+        "weekFromEnd": 5,
+        "weeknumber": 41,
+        "isoWeeknumber": 40,
+        "month": 10,
+        "year": 2022,
+        "date": "2022-10-03T16:00:00.000Z",
+        "range": {
+            "start": "2022-10-03T16:00:00.000Z",
+            "end": "2022-10-04T15:59:59.999Z"
+        },
+        "isToday": false,
+        "isFirstDay": false,
+        "isLastDay": false,
+        "inMonth": true,
+        "inPrevMonth": false,
+        "inNextMonth": false,
+        "onTop": false,
+        "onBottom": false,
+        "onLeft": false,
+        "onRight": false,
+        "classes": [
+            "id-2022-10-04",
+            "day-4",
+            "day-from-end-28",
+            "weekday-3",
+            "weekday-position-3",
+            "weekday-ordinal-1",
+            "weekday-ordinal-from-end-4",
+            "week-2",
+            "week-from-end-5",
+            {
+                "is-today": false,
+                "is-first-day": false,
+                "is-last-day": false,
+                "in-month": true,
+                "in-prev-month": false,
+                "in-next-month": false,
+                "on-top": false,
+                "on-bottom": false,
+                "on-left": false,
+                "on-right": false
+            }
+        ],
+        "isDisabled": false,
+        "isFocusable": false,
+        "refresh": false,
+        "attributesMap": {},
+        "attributes": []
+    },
+    "attributes": [],
+    "attributesMap": {},
+    "dayProps": {
+        "tabindex": "-1",
+        "aria-label": "Tuesday, October 4, 2022",
+        "aria-disabled": "false",
+        "role": "button"
+    },
+    "dayEvents": {}
+}
